@@ -1,0 +1,34 @@
+liman laravef tabanlı bir yazılım olup MVC mimarisi kullanmaktadır. Eklentimizde aslında modal katmanını tam olarak kullanmıyoruz çünkü veri tabanına tam olarak erişim iznimiz yok.
+
+verileri controller verir ancak view vasıtasıyla gösteririz.
+
+app klasörü bizim controllerlarımızı, task olarak ifade ettiğimiz görevlerimizi, yardımcı fonksiyonlarımızı içeren  controllerlarımızı, sunucu ile bağlantımızı ve portun açık olmadığını kontrol eden helper dosyasını içerir. Her yerde çağırmamız gereken ortak fonksiyonları class dışarısında helper dosyasında tanımlarız. Controllerlar arka yüzde yaptığımız işlemler bütünüdür. Örnek olarak;
+
+command classının run fonksiyonunu çalıştırsın ve run fonksiyonunun hostname i döndürmesi için argüman olarak hostname i veririz. Çıktısını hazır respond çıktısı ile gönderimini sağlarız. Bu kodu çekebilmek için html dosyasında bir şey yok. Script dosyasına geldiğimizde getHostname diye bir java scrpit fonksiyonu tanımladığımızı görürüz. Daha öncesinde rotalar kısmımızda controllerdan belirttiğimiz get_hostname fonksiyonunu, yani HostnameController içerisindeki get fonksiyonunu çağırmasını sağlıyoruz.
+
+
+
+Apı daki get_hostname fonksiyonuna git ve buradan dönen response değerini hostname classının içerisinde yazdır. İşim bitene kadar yükleniyor uyarısı çıkartır Swal. get_hostnamedeki Apı ma yani controllardaki get fonksiyonuma git. Buna formumdan veri gönder. Veri kullanmadığımız için boş olarak göndermiş olduk.  Fonksiyon bir cevap alır, bu dönen cevabı JSON olarak parçalanmasını istedik. İçerisindeki mesajı hostname classına yani htm içerisinde belirttiğim kısma Jquery vasıtası ile içerisine text olarak yazdır. Ardından swal uyarısını kapatırız.
+
+hostname komutunu izin olmadan görüntüleyebiliriz ancak değişim işlemi için erişim iznimiz olması gerekir. Bu yüzden runSudo komutu kullanırız(status). 
+
+Kötü niyetli saldırılara karşı command fonksiyonu kullanılırken escaping olayı kullanılır.
+
+ikinci parametre olarak fonksiyona bir array/ liste veririz ve bu listede hostname keyine requestten gelen hostname i göndeririz. Kötü niyetli kullanıcılar sisteme saldıramamış oldu.
+
+TABLE COMPANENTİ
+
+include table(blade php), exampledata diye bir verimiz var ve bu verimiz üzerinden isim, soyisim, eposta, telefon ve gizli bir alan daha oluşturduk. Displayde de verideki keylerin isimlerine göre gösteririz. (arraydeki dictionary olayı). Tablonun satırların tıkladığımda onlick olayını javascriptte çalıştır. Bunu da script kısmında lineonclickevent olarak tanımladık.Ardından sağ klick menusüne de örnek bir eleman ekledik ve iconu nasıl eklediğimizi, sağ click e tıklandığında hangi javascript fonksiyonunun çalışacağını gösterdik.
+
+MODAL COMPANENTİ
+
+Öncelikle modalı açabilmek için, modal-button diye bir companent tanımladık.
+
+modal companentin ikinci argümanında bir array verdik, bu arrayde de (notsized ve modaldialog şu anlık gereksiz), içini belirtiriz. 
+
+Bir sekme oluşturacağımızda ilk olarak index.blade kısmında onclick yapıldığında hangi fonksiyonun çalışmasını istiyorsak onu belirtmeliyiz. # ile id yi tanımlarız. Tanımladığımız id yi yine index.blade kısmında alt tarafta belirtiriz. Burada belirttiğimiz fonksiyon ve id ye göre bir view oluşturmamız gerekiyor. Oluşturacağımız view ana view imize entegre olarak dışardan çağırılabilecek. oluşturduğumuz klasöre main ve script dosyalarını ekledikten sonra çağıracağımız fonksiyonu(onclick e basıldığında), script kısmında oluşturuyoruz. Hostnamedeki gibi boş sütunları doldurmak için API dan çağrı yaparak verileri eklememizi sağlamaktadır. Oluşturduğumuz fonksiyonun çalışabilmesi için mainde row ve col-12 oluşturup fonksiyon.scriptsi içe inclued etmemiz lazım. Artık çalışmaya hazırız. Backand ilemleri yapmadan bir modal oluşturalım.(mainde). Öncelikle modalı açabilmek için bir modal button oluşturuyoruz. @include("modal-button", [] ) ikinci argüman olarak da bir array oluşturuyoruz. @include yapısı genel olarak ikinci argümanda array alır ve bu viewe göndereceğimiz değişkenleri içerir. class ımızda butonumuzu tanımlarız(adminlte 3 teki success i seçtik), ardından açacağımız modalı target_id de belirtiriz. Düğmeye tıklandığında ne yazacağını belirtmek için de text imizi yazarız. Örnek butonumuzu oluşturmuş olduk. Ancak limanda butonuma tıkladığımızda açılmaz çünkü onclickevent modalımızı oluşturmadık. Modalcompanentimizi oluşturmak için @compenent ve @endcompanent yazarak companent yapımızı açarız. Yine ikinci argüman olarak array veriyoruz. Array içeriğimizde yine ihtiyacımız olan ifadeleri yazarız. En önemlisi olan idyi tanımlıyoruz. title değişkeni de örnek bir isim veriyoruz gözükmesini istediğimiz. Footer tanımlıyoruz yine array şeklinde, 
+
+class, onclick(tıklandığında gereken işlemler), text.
+
+Scriptte tanımladığımız modal Event fonksiyonunu oluşturarak console.log("ateşlendi") ile açarız.
+
